@@ -24,11 +24,14 @@ class UserApiService {
     const response = await fetch(API_AUTH_URL + 'login', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ username, password })
+      body: JSON.stringify({
+        username,
+        password
+      })
     }).catch((error) => {
-      console.error('There was an error!', error)
+      console.error('There was an error during the login', error)
     })
 
     if (response.ok) {
@@ -36,24 +39,41 @@ class UserApiService {
       const user = jsonResponse.user
       const authStore = useAuthStore()
       authStore.updateUser(user)
-      return
+      return jsonResponse
     }
 
-    //throw new Error('Login failed')
+    if (response) {
+      let responseMessage = await response.json()
+      throw new Error(responseMessage.message)
+    }
+
+    throw new Error('Login failed.')
   }
 
-  async register(email, password) {
-    const res = await fetch(API_AUTH_URL + 'register', {
+  async register(username, email, password, sudoPassword) {
+    const response = await fetch(API_AUTH_URL + 'register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({
+        username: username,
+        email: email,
+        password: password,
+        sudoPassword: sudoPassword
+      })
+    }).catch((error) => {
+      console.error('There was an error during the registration', error)
     })
 
-    if (res.ok) {
-      const response = await res.json()
-      return response.message
+    if (response.ok) {
+      let jsonResponse = await response.json()
+      return jsonResponse
+    }
+
+    if (response) {
+      let jsonResponse = await response.json()
+      throw new Error(jsonResponse.message)
     }
 
     throw new Error('Failed to register')
