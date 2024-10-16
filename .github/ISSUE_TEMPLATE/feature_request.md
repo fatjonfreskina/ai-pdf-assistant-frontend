@@ -7,9 +7,9 @@ assignees: ''
 
 ---
 
-*As a [developer] , 
+*As a* developer, 
 
-*I want to* [develop]
+*I want to* develop [what]
 
 *So that* [desired result]
 
