@@ -1,5 +1,6 @@
 <script setup>
 import UserApiService from '@/services/UserApiService.js'
+import { useAuthStore } from '@/stores/AuthStore'
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router' // For navigation after successful login
 
@@ -8,14 +9,20 @@ const username = ref('')
 const password = ref('')
 const error = ref(false)
 const errorText = ref('')
+const authStore = useAuthStore()
 
-onMounted(() => {})
+onMounted(() => {
+  if (authStore.user) {
+    // TODO: check if the token is still valid
+    router.push('/home')
+  }
+})
 
 async function onLoginPressed() {
   try {
     let result = await UserApiService.login(username.value, password.value)
     if (result.message) {
-      router.push('/home') // Redirect to dashboard after successful login
+      router.push('/home')
     }
   } catch (e) {
     errorText.value = e.message
@@ -82,7 +89,6 @@ async function showError() {
 </template>
 
 <style scoped>
-
 .card {
   border-radius: 10px;
 }

@@ -1,13 +1,14 @@
 import { useAuthStore } from '@/stores/AuthStore'
 
-// NOT TESTED YET
-
 export default function authHeader() {
   const authStore = useAuthStore()
-  let user = authStore.getUser
+  const token = authStore.getToken()
 
-  if (user && user.accessToken) {
-    return { Authorization: 'Bearer ' + user.accessToken }
+  if (token) {
+    return { 
+      Authorization: 'Bearer ' + token,
+      'Content-Type': 'application/json'
+    }
   } else {
     return {}
   }

@@ -1,25 +1,8 @@
-import axios from 'axios'
 import { useAuthStore } from '@/stores/AuthStore'
-import authHeader from './AuthHeaderService'
 
 const API_AUTH_URL = 'http://localhost:8000/auth/'
 
 class UserApiService {
-  async fetchUser() {
-    const res = await axios.get(API_AUTH_URL + 'user', {
-      headers: authHeader()
-    })
-
-    if (res.ok) {
-      const jsonResponse = await res.json()
-      const user = jsonResponse.user
-      const authStore = useAuthStore()
-      authStore.updateUser(user)
-    }
-
-    throw new Error('Failed to fetch user')
-  }
-
   async login(username, password) {
     const response = await fetch(API_AUTH_URL + 'login', {
       method: 'POST',
@@ -34,20 +17,20 @@ class UserApiService {
       console.error('There was an error during the login', error)
     })
 
+    if (!response) {
+      throw new Error('Login failed.')
+    }
+
+    const jsonResponse = await response.json()
+
     if (response.ok) {
-      const jsonResponse = await response.json()
-      const user = jsonResponse.user
       const authStore = useAuthStore()
-      authStore.updateUser(user)
+      authStore.updateUser(jsonResponse.user)
+      authStore.updateToken(jsonResponse.tokens.access_token)
       return jsonResponse
     }
 
-    if (response) {
-      let responseMessage = await response.json()
-      throw new Error(responseMessage.message)
-    }
-
-    throw new Error('Login failed.')
+    throw new Error(jsonResponse.message)
   }
 
   async register(username, email, password, sudoPassword) {
@@ -66,17 +49,17 @@ class UserApiService {
       console.error('There was an error during the registration', error)
     })
 
+    if (!response) {
+      throw new Error('Failed to register')
+    }
+
+    const jsonResponse = await response.json()
+
     if (response.ok) {
-      let jsonResponse = await response.json()
-      return jsonResponse
+      return jsonResponse.message
     }
 
-    if (response) {
-      let jsonResponse = await response.json()
-      throw new Error(jsonResponse.message)
-    }
-
-    throw new Error('Failed to register')
+    throw new Error(jsonResponse.message)
   }
 }
 
