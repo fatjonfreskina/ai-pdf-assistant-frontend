@@ -1,5 +1,5 @@
 <script setup>
-import UserApiService from '@/services/UserApiService.js'
+import UserApiService from '../services/UserApiService.js'
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 

@@ -1,6 +1,8 @@
-import { useAuthStore } from '@/stores/AuthStore'
+import { useAuthStore } from '../stores/AuthStore'
 
-const API_AUTH_URL = 'http://localhost:8000/auth/'
+const API_AUTH_URL = import.meta.env.MODE === 'development' ? 
+  `http://localhost:8000/auth/` : 
+  `https://fatjonfreskina.westeurope.cloudapp.azure.com/assistant/auth/`
 
 class UserApiService {
   async login(username, password) {

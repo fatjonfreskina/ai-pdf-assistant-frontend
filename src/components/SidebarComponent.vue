@@ -1,7 +1,7 @@
 <script setup>
 import ChatBox from './ChatBox.vue'
 import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/AuthStore'
+import { useAuthStore } from '../stores/AuthStore'
 import { ref } from 'vue'
 
 const router = useRouter()

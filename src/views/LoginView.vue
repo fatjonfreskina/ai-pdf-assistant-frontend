@@ -1,6 +1,6 @@
 <script setup>
-import UserApiService from '@/services/UserApiService.js'
-import { useAuthStore } from '@/stores/AuthStore'
+import UserApiService from '../services/UserApiService.js'
+import { useAuthStore } from '../stores/AuthStore'
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router' // For navigation after successful login
 

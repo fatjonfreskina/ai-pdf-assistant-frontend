@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { marked } from 'marked';
-import AiApiService from '@/services/AiApiService'
+import AiApiService from '../services/AiApiService'
 
 const props = defineProps(['assistant'])
 const messages = ref([])

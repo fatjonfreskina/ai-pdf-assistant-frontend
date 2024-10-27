@@ -1,4 +1,4 @@
-import { useAuthStore } from '@/stores/AuthStore'
+import { useAuthStore } from '../stores/AuthStore'
 
 export default function authHeader() {
   const authStore = useAuthStore()

@@ -1,8 +1,8 @@
 <script setup>
 // import NavBar from '../components/NavBar.vue'
-import SidebarComponent from '@/components/SidebarComponent.vue'
-import { useAuthStore } from '@/stores/AuthStore'
-import AiApiService from '@/services/AiApiService'
+import SidebarComponent from '../components/SidebarComponent.vue'
+import { useAuthStore } from '../stores/AuthStore'
+import AiApiService from '../services/AiApiService'
 import { onMounted, ref } from 'vue'
 
 const authStore = useAuthStore()

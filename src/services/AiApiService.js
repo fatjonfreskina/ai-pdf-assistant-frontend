@@ -1,6 +1,8 @@
-import authHeader from '@/services/AuthHeaderService'
+import authHeader from '../services/AuthHeaderService'
 
-const API_AI_URL = 'http://localhost:8000/ai/'
+const API_AI_URL = import.meta.env.MODE === 'development' ? 
+  `http://localhost:8000/ai/` : 
+  `https://fatjonfreskina.westeurope.cloudapp.azure.com/assistant/ai/`
 
 class AiApiService {
   async getAllAssistants() {
