@@ -12,6 +12,18 @@ function clearChat() {
   messages.value = []
 }
 
+function joinCitationsToResponse(response, citations) {
+  let responseWithCitations = response
+  if (citations.length > 0) {
+    responseWithCitations += '\n\n'
+    responseWithCitations += '### Citations\n'
+    citations.forEach((citation, index) => {
+      responseWithCitations += `${index + 1}. ${citation}\n`
+    })
+  }
+  return responseWithCitations
+}
+
 async function sendMessage() {
   if (props.assistant === '') {
     alert('Please select an assistant first.')
@@ -38,9 +50,10 @@ async function sendMessage() {
       newMessage.value = ''
       const result = await AiApiService.askQuestion(props.assistant, messageToSend)
       loadingResponse.value = false
-      // result.citations contains the citations
+      let responseText = result.response
+      let responseCitations = result.citations
       messages.value.unshift({
-        text: marked(result.response),
+        text: marked(joinCitationsToResponse(responseText, responseCitations)),
         sender: 'assistant',
         timestamp: new Date().toLocaleTimeString()
       })
