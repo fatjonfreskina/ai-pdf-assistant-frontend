@@ -30,12 +30,14 @@ async function onRegisterPressed() {
       password.value,
       sudoPassword.value
     )
-    if (result.message) {
+    
+    if (result) {
       showSuccessBanner()
       setTimeout(() => {
         router.push('/login')
       }, 3000)
     }
+    
   } catch (e) {
     showErrorBanner(e.message)
   }
@@ -53,7 +55,7 @@ async function showSuccessBanner() {
   successfulRegistration.value = true
   setTimeout(() => {
     successfulRegistration.value = false
-  }, 3000)
+  }, 5000)
 }
 </script>
 
