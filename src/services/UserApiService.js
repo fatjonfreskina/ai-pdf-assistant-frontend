@@ -1,8 +1,8 @@
 import { useAuthStore } from '../stores/AuthStore'
 
 const API_AUTH_URL = import.meta.env.MODE === 'development' ? 
-  `http://localhost:8000/auth/` : 
-  `https://fatjonfreskina.westeurope.cloudapp.azure.com/assistant/auth/`
+  `http://localhost:8000/user/` : 
+  `https://fatjonfreskina.westeurope.cloudapp.azure.com/assistant/user/`
 
 class UserApiService {
   async login(username, password) {
