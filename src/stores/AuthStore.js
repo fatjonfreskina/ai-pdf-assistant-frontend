@@ -1,8 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
-// TODO: add the token to the store
-
 export const useAuthStore = defineStore('auth', () => {
   const user = ref(JSON.parse(localStorage.getItem('user')))
   const jwt = ref(JSON.parse(localStorage.getItem('jwt')))

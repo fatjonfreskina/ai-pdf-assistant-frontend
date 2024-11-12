@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { marked } from 'marked';
+import { marked } from 'marked'
 import AiApiService from '../services/AiApiService'
 
 const props = defineProps(['assistant'])
@@ -44,9 +44,9 @@ async function sendMessage() {
     })
 
     // Clear the input field
-    try{
+    try {
       loadingResponse.value = true
-      const messageToSend = newMessage.value;
+      const messageToSend = newMessage.value
       newMessage.value = ''
       const result = await AiApiService.askQuestion(props.assistant, messageToSend)
       loadingResponse.value = false
@@ -81,9 +81,9 @@ async function sendMessage() {
       </div>
       <!-- Show loading message or spinner when loadingResponse is true -->
       <div v-if="loadingResponse" class="loading-indicator">
-          <span>Loading response...</span>
-          <!-- You could also replace the text with a spinner icon or image here -->
-        </div>
+        <span>Loading response...</span>
+        <!-- You could also replace the text with a spinner icon or image here -->
+      </div>
       <div class="card-footer">
         <div class="input-group">
           <input
@@ -100,7 +100,6 @@ async function sendMessage() {
     </div>
   </div>
 </template>
-
 
 <style scoped>
 .chat-container {

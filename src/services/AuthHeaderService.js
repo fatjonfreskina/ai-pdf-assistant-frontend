@@ -5,7 +5,7 @@ export default function authHeader() {
   const token = authStore.getToken()
 
   if (token) {
-    return { 
+    return {
       Authorization: 'Bearer ' + token,
       'Content-Type': 'application/json'
     }
