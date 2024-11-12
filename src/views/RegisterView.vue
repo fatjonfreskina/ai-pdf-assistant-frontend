@@ -17,8 +17,27 @@ const errorText = ref('')
 
 onMounted(() => {})
 
+function hasEmptyFields() {
+  return (
+    !username.value ||
+    !email.value ||
+    !password.value ||
+    !confirmPassword.value ||
+    !sudoPassword.value
+  )
+}
+
+function arePasswordsValid() {
+  return password.value === confirmPassword.value
+}
+
 async function onRegisterPressed() {
-  if (password.value !== confirmPassword.value) {
+  if (hasEmptyFields()) {
+    showErrorBanner('Please fill in all fields')
+    return
+  }
+
+  if (!arePasswordsValid()) {
     showErrorBanner('Passwords do not match')
     return
   }
@@ -30,14 +49,13 @@ async function onRegisterPressed() {
       password.value,
       sudoPassword.value
     )
-    
+
     if (result) {
       showSuccessBanner()
       setTimeout(() => {
         router.push('/login')
       }, 3000)
     }
-    
   } catch (e) {
     showErrorBanner(e.message)
   }
