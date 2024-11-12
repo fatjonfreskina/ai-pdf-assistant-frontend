@@ -22,21 +22,40 @@ const router = createRouter({
       component: () => import('../views/HomeView.vue')
     },
 
+    {
+      path: '/password-forgot',
+      name: 'password-forgot',
+      component: () => import('../views/PasswordForgotView.vue')
+    },
+
+    {
+      path: '/password_reset/:token',
+      name: 'password_reset',
+      component: () => import('../views/PasswordResetView.vue'),
+      props: true  // Automatically passes route parameters (like token) as props
+    },
+
     { path: '/:pathMatch(.*)*', redirect: '/login' }
   ]
 })
 
 router.beforeEach((to) => {
-  // redirect to login page if not logged in and trying to access a restricted page
-  const publicPages = ['/login', '/register']
-  const authRequired = !publicPages.includes(to.path)
-  const authStore = useAuthStore()
+  const publicPages = ['/login', '/register', '/password-forgot', '/password_reset'];
+  
+  // Extract the base path without the token
+  const basePath = to.path.split('/')[1];  // This gets 'password_reset' from '/password_reset/TOKEN'
+
+  const authRequired = !publicPages.includes(`/${basePath}`);
+  const authStore = useAuthStore();
+  
   if (authRequired && !authStore.user) {
+    console.log('Redirecting to login, authRequired:', authRequired, 'user:', authStore.user);
     return {
       path: '/login',
-      query: { returnUrl: to.path }
-    }
+      query: { returnUrl: to.fullPath }
+    };
   }
-})
+});
+
 
 export default router
