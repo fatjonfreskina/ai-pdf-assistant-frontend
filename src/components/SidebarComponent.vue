@@ -2,7 +2,7 @@
 import ChatBox from './ChatBox.vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/AuthStore'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 
 const router = useRouter()
 const authStore = useAuthStore()
@@ -22,6 +22,16 @@ const logout = () => {
   authStore.logout()
   router.push('/login')
 }
+
+// Watch for changes in props.assistants
+watch(
+  () => props.assistants,
+  (newAssistants) => {
+    if (newAssistants && newAssistants.length > 0) {
+      selectedAssistant.value = newAssistants[0]
+    }
+  }
+)
 </script>
 
 <template>
@@ -96,7 +106,6 @@ const logout = () => {
       </div>
       <div class="col py-3">
         <ChatBox v-if="selectedAssistant != null" :assistant="selectedAssistant" />
-        <!-- TODO: Add a message to display when no assistant is selected -->
         <div v-else class="alert alert-info" role="alert">
           Select an assistant from the menu to start chatting.
         </div>
