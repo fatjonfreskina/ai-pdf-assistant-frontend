@@ -73,7 +73,7 @@ async function showError() {
           <button
             type="button"
             class="btn btn-outline-secondary"
-            @click="router.push('/forgot-password')"
+            @click="router.push('/password-forgot')"
           >
             Forgot Password?
           </button>
