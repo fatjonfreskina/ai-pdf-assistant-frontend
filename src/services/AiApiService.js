@@ -1,8 +1,9 @@
 import authHeader from '../services/AuthHeaderService'
 
-const API_AI_URL = import.meta.env.MODE === 'development' ? 
-  `http://localhost:8000/ai/` : 
-  `https://fatjonfreskina.westeurope.cloudapp.azure.com/assistant/ai/`
+const API_AI_URL =
+  import.meta.env.MODE === 'development'
+    ? `http://localhost:8000/ai/`
+    : `https://fatjonfreskina.westeurope.cloudapp.azure.com/assistant/ai/`
 
 class AiApiService {
   async getAllAssistants() {
@@ -54,7 +55,7 @@ class AiApiService {
         assistant_name: assistantName,
         question: question
       }),
-      headers: authHeader(),
+      headers: authHeader()
     }).catch((error) => {
       console.error(`Error asking question to assistant ${assistantName}:`, error)
     })
