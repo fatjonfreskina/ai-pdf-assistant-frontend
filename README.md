@@ -1,10 +1,16 @@
 # ai-pdf-assistant-frontend
 
-This template should help get you started developing with Vue 3 in Vite.
+The frontend for the AI PDF Assistant [project](https://github.com/fatjonfreskina/ai-pdf-assistant-backend).
 
-## Recommended IDE Setup
+## Contribute :raised_hands:
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+Contributions are more than welcome using the ["fork and pull request"](https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project) workflow. Briefly:
+
+1. Fork the project and clone it locally.
+2. Create a new branch following the pattern `<placeholder>-issueNumber`. Where placeholders can be `develop`, `bugfix`, `documentation` only.
+3. Make your changes and push them to your fork.
+4. Create a pull request to the main branch.
+5. Your pull request will be reviewed and merged.
 
 ## Customize configuration
 
