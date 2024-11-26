@@ -97,6 +97,11 @@ watch(
               <li><a class="dropdown-item" href="#">Settings</a></li>
               <li><a class="dropdown-item" href="#">Profile</a></li>
               <li>
+                <a class="dropdown-item" href="https://github.com/fatjonfreskina/ai-pdf-assistant-frontend/issues/new/choose">
+                  Bug Report <i class="fas fa-external-link-alt"></i>
+                </a>
+              </li>
+              <li>
                 <hr class="dropdown-divider" />
               </li>
               <li><a class="dropdown-item" href="#" @click="logout">Sign out</a></li>
