@@ -1,9 +1,11 @@
 import { useAuthStore } from '../stores/AuthStore'
+import.meta.env.VITE_API_URL_DEV;
+import.meta.env.VITE_API_URL_PROD;
 
 const API_AUTH_URL =
   import.meta.env.MODE === 'development'
-    ? `http://localhost:8000/user/`
-    : `https://fatjonfreskina.westeurope.cloudapp.azure.com/assistant/user/`
+    ? import.meta.env.VITE_API_URL_DEV + 'user/'
+    : import.meta.env.VITE_API_URL_PROD + 'user/';
 
 class UserApiService {
   async login(username, password) {

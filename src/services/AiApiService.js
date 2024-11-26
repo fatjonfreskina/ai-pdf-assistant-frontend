@@ -1,9 +1,11 @@
 import authHeader from '../services/AuthHeaderService'
+import.meta.env.VITE_API_URL_DEV;
+import.meta.env.VITE_API_URL_PROD;
 
 const API_AI_URL =
   import.meta.env.MODE === 'development'
-    ? `http://localhost:8000/ai/`
-    : `https://fatjonfreskina.westeurope.cloudapp.azure.com/assistant/ai/`
+    ? import.meta.env.VITE_API_URL_DEV + 'ai/'
+    : import.meta.env.VITE_API_URL_PROD + 'ai/';
 
 class AiApiService {
   async getAllAssistants() {
