@@ -1,5 +1,6 @@
 <script setup>
 import ChatBox from './ChatBox.vue'
+import ReleaseNotesModal from './ReleaseNotesModalComponent.vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/AuthStore'
 import { ref, watch } from 'vue'
@@ -9,6 +10,8 @@ const authStore = useAuthStore()
 const props = defineProps(['assistants', 'user'])
 const selectedAssistant = ref(null)
 const isSubmenuOpen = ref(true)
+
+const releaseNotesModal = ref(null)
 
 const toggleSubmenu = () => {
   isSubmenuOpen.value = !isSubmenuOpen.value
@@ -21,6 +24,12 @@ const selectAssistant = (assistant) => {
 const logout = () => {
   authStore.logout()
   router.push('/login')
+}
+
+const showReleaseNotes = () => {
+  if (releaseNotesModal.value) {
+    releaseNotesModal.value.show()
+  }
 }
 
 // Watch for changes in props.assistants
@@ -47,6 +56,7 @@ watch(
           >
             <span class="fs-5 d-none d-sm-inline">Menu</span>
           </a>
+
           <ul
             class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
             id="menu"
@@ -97,9 +107,18 @@ watch(
               <li><a class="dropdown-item" href="#">Settings</a></li>
               <li><a class="dropdown-item" href="#">Profile</a></li>
               <li>
-                <a class="dropdown-item" href="https://github.com/fatjonfreskina/ai-pdf-assistant-frontend/issues/new/choose">
-                  Bug Report <i class="fas fa-external-link-alt"></i>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="https://github.com/fatjonfreskina/ai-pdf-assistant-frontend/issues/new"
+                >
+                  Bug Report
                 </a>
+              </li>
+              <li>
+                <a class="dropdown-item" @click="showReleaseNotes" href="#">Version 0.2.2</a>
               </li>
               <li>
                 <hr class="dropdown-divider" />
@@ -117,6 +136,7 @@ watch(
       </div>
     </div>
   </div>
+  <ReleaseNotesModal ref="releaseNotesModal" />
 </template>
 
 <style scoped>
@@ -138,5 +158,9 @@ watch(
 
 .dropdown-item:hover {
   background-color: #495057;
+}
+
+.small-icon {
+  font-size: 0.6em; /* Adjust the size as needed */
 }
 </style>
