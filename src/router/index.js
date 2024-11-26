@@ -32,7 +32,7 @@ const router = createRouter({
       path: '/password_reset/:token',
       name: 'password_reset',
       component: () => import('../views/PasswordResetView.vue'),
-      props: true  // Automatically passes route parameters (like token) as props
+      props: true // Automatically passes route parameters (like token) as props
     },
 
     { path: '/:pathMatch(.*)*', redirect: '/login' }
@@ -40,22 +40,21 @@ const router = createRouter({
 })
 
 router.beforeEach((to) => {
-  const publicPages = ['/login', '/register', '/password-forgot', '/password_reset'];
-  
-  // Extract the base path without the token
-  const basePath = to.path.split('/')[1];  // This gets 'password_reset' from '/password_reset/TOKEN'
+  const publicPages = ['/login', '/register', '/password-forgot', '/password_reset']
 
-  const authRequired = !publicPages.includes(`/${basePath}`);
-  const authStore = useAuthStore();
-  
+  // Extract the base path without the token
+  const basePath = to.path.split('/')[1] // This gets 'password_reset' from '/password_reset/TOKEN'
+
+  const authRequired = !publicPages.includes(`/${basePath}`)
+  const authStore = useAuthStore()
+
   if (authRequired && !authStore.user) {
-    console.log('Redirecting to login, authRequired:', authRequired, 'user:', authStore.user);
+    console.log('Redirecting to login, authRequired:', authRequired, 'user:', authStore.user)
     return {
       path: '/login',
       query: { returnUrl: to.fullPath }
-    };
+    }
   }
-});
-
+})
 
 export default router
