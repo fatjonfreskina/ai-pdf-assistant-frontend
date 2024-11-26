@@ -41,9 +41,10 @@ async function showError() {
 <template>
   <div class="container-fluid vh-100 d-flex justify-content-center align-items-center">
     <div class="card shadow-lg p-4" style="max-width: 400px; width: 100%">
-      <h2 class="text-center mb-4">Welcome Back</h2>
+      <h2 class="text-center mb-4">Welcome back</h2>
+      <img src="/logo.png" alt="Logo" class="login-logo" />
       <form @submit.prevent="login">
-        <div class="mb-3">
+        <div class="mb-2">
           <label for="username" class="form-label">Username</label>
           <input
             type="text"
@@ -64,7 +65,7 @@ async function showError() {
           />
         </div>
         <div class="d-grid gap-2">
-          <button type="submit" class="btn btn-primary btn-lg" @click="onLoginPressed">
+          <button type="submit" class="btn btn-primary btn-lg mt-3" @click="onLoginPressed">
             Login
           </button>
           <div v-if="error" class="alert alert-danger" role="alert">
@@ -72,7 +73,7 @@ async function showError() {
           </div>
           <button
             type="button"
-            class="btn btn-outline-secondary"
+            class="btn btn-outline-secondary mt-2"
             @click="router.push('/password-forgot')"
           >
             Forgot Password?
@@ -89,6 +90,12 @@ async function showError() {
 </template>
 
 <style scoped>
+.login-logo {
+  width: 150px; /* Adjust the size as needed */
+  margin-bottom: 20px; /* Adjust the spacing as needed */
+  align-self: center;
+}
+
 .card {
   border-radius: 10px;
 }
